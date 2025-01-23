@@ -16,7 +16,7 @@ This project is a web-based video call application built with **Node.js** and **
 
 ### Frontend
 
--   **Next.js**
+-   **ReactJs**
     -   React framework for server-side rendering and dynamic routing.
 -   **TailwindCSS**
     -   Utility-first CSS framework for fast and responsive styling.
