@@ -42,8 +42,8 @@ const VideoCallPage = () => {
 
         fetchRoomDetails();
 
-        socket.on("connect", () => {
-            console.log("Đã kết nối lại");
+        socket.on("connect", async () => {
+            console.log("Connected to server", socket.id);
             socket.emit("join-room", roomId);
         });
 
@@ -73,7 +73,6 @@ const VideoCallPage = () => {
         });
 
         return () => {
-            socket.off("connect");
             socket.off("user-joined");
             socket.off("offer");
             socket.off("answer");
@@ -82,11 +81,12 @@ const VideoCallPage = () => {
         };
     }, [roomId, navigate]);
 
+    // Handle creating an offer
     const createOffer = async () => {
         const pc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
         pcRef.current = pc;
 
-        // Add media
+        // Thêm media track vào peer connection
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         stream.getTracks().forEach((track) => pc.addTrack(track, stream));
         setMyStream(stream);
@@ -158,7 +158,8 @@ const VideoCallPage = () => {
         navigate("/");
     };
     console.log({ remoteSocketId });
-    console.log("sender", socket.id);
+
+    console.log("socketId", socket.id);
 
     return (
         <div className="relative bg-black h-screen flex flex-col justify-between">

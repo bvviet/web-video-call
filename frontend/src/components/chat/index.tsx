@@ -35,7 +35,6 @@ const Chat: React.FC<IChatProps> = ({ roomId, senderId, receiverId }) => {
         socket.emit("send-message", { roomId, senderId, receiverId, message: valueInput });
         fetchMessages();
     };
-    console.log({ messages });
 
     return (
         <div className="text-[#202124] h-full">

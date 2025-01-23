@@ -66,12 +66,12 @@ export default (httpServer) => {
 
         // ------------------------------------- Chat -------------------------------------
         socket.on("send-message", async ({ roomId, senderId, receiverId, message }) => {
-            if (receiverId && senderId) {
+            if (receiverId) {
                 const newMessage = new Chat({ roomId, senderId, receiverId, message });
                 await newMessage.save();
                 io.to(receiverId).emit("receive-message", { senderId, message });
             } else {
-                console.log("Not receiverId");
+                console.log("Not ");
             }
         });
 
